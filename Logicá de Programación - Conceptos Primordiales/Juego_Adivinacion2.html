@@ -1,0 +1,32 @@
+<meta charset="UTF-8">
+
+<h1>JUEGO DE ADIVINANZA</h1>
+
+<script>
+
+    function saltarLinea() {
+        document.write("<br><br><br>");
+    }
+
+    function print(text) {
+        document.write("<hr>" + text + "</hr>");
+        saltarLinea();
+    }
+
+    function sorteo(n) {
+        return Math.round(Math.random() * n);
+    }
+    var numMayor = parseInt(prompt("Ingrese el numero mayor a adivinar"));
+    var numPensado = sorteo(numMayor);
+    for(var i = 1; i <= 3; i++) {
+        var numAdivinado = parseInt(prompt("Ingrese un numero entre 0-" + numMayor));
+        if (numPensado == numAdivinado) {
+            print("Ha adivinado correctamente en el intento " + i + ", el numero era " + numPensado);
+            break;
+        }
+        else {
+            alert("No has acertado");
+        }
+    }
+
+</script>
