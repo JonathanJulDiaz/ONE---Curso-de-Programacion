@@ -1,0 +1,25 @@
+<h1>PROGRAMA - CALCULAR LA MEDIA DE LAS EDADES</h1>
+
+<script>
+
+    function saltarLinea(){
+        document.write("<br><br><br>");
+    }
+
+    function print(frase){
+        document.write("<big>" + frase + "</big>");
+        saltarLinea();
+    }
+
+    var cantidad = parseInt(prompt("Ingrese la cantidad de miebros de la familia"));
+    var totalEdad = 0;
+    for(var i = 1; i <= cantidad; i++){
+        var edad = parseInt(prompt("Ingrese la edad del miebro de la familia"))    ;
+        totalEdad = totalEdad + edad;
+    }
+
+    var media = totalEdad/cantidad;
+
+    print("La media de las edades es " + media);
+
+</script>
