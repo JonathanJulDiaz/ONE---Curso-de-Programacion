@@ -1,0 +1,35 @@
+<meta charset="UTF-8">
+
+<h1>JUEGO DE ADIVINANZA</h1>
+
+<script>
+
+    function saltarLinea(){
+        document.write("<br><br><br>");
+    }
+
+    function print(text){
+        document.write("<hr>"+text+"</hr>");
+        saltarLinea();
+    }
+
+    function sorteo(n){
+        return Math.round(Math.random()*n);
+    }
+
+    var numPensado = sorteo(parseInt(prompt("Ingrese el numero mayor a adivinar")));
+    var numAdivinado = parseInt(prompt("Ingrese un numero entre 0-"+numPensado));
+
+    if(numPensado == numAdivinado){
+        print("Ha adivinado correctamente!!");
+    }
+    else{
+        if(numPensado > numAdivinado){
+            print("No has acertado, el numero era menor");
+        }
+        else{
+            print("No has acertado, el numero era mayor");
+        }
+    }
+
+</script>
