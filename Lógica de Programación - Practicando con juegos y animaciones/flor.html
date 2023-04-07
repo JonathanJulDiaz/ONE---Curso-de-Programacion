@@ -15,14 +15,18 @@
         pincel.fill();
     }
 
-    function flor() {
-        dibujarCirculo(300, 200, 10, "red");
-        dibujarCirculo(300, 180, 10, "yellow");
-        dibujarCirculo(280, 200, 10, "orange");
-        dibujarCirculo(320, 200, 10, "black");
-        dibujarCirculo(300, 220, 10, "blue");
+    function flor(x, y, radio) {
+        dibujarCirculo(x, y, radio, "red");
+        dibujarCirculo(x, y-20, radio, "yellow");
+        dibujarCirculo(x-20, y, radio, "orange");
+        dibujarCirculo(x+20, y, radio, "black");
+        dibujarCirculo(x, y+20, radio, "blue");
     }
 
-    flor();
+    for(var i = 1; i < 20; i += 2){
+        for(var j = 1; j <= 12; j += 2){
+            flor(i*30,j*30,10);
+        }
+    }
 
 </script>
