@@ -1,0 +1,20 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var p = pantalla.getContext("2d");
+
+    p.fillStyle = "darkgreen";
+    p.fillRect(150,50,350,300); // Cabeza
+
+    p.fillStyle = "black";
+    p.fillRect(200,100,90,90); // Ojos
+    p.fillRect(360,100,90,90);
+
+    p.fillRect(290,190,70,100); // Boca
+
+    p.fillRect(250,240,40,110); // Bordes de la boca
+    p.fillRect(360,240,40,110);
+
+</script>
