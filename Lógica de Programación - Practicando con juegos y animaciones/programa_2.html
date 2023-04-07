@@ -13,8 +13,14 @@
     var pantalla = document.querySelector("canvas");
     var pincel = pantalla.getContext("2d");
 
-    for (var i = 0; i < 3; i++){
-        cuadrado(i*50,0, "green");
+    for (var i = 0; i <= 12; i++){
+        for(var j = 0; j <= 8; j++){
+            cuadrado(i*50,j*50,"red");
+            j++;
+            cuadrado(i*50,j*50,"yellow");
+            j++;
+            cuadrado(i*50,j*50,"green");
+        }
     }
 
 </script>
