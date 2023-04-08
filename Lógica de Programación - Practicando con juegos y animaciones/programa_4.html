@@ -21,14 +21,37 @@
     }
 
     var x = 0;
+    var derecha = true;
 
     function actualizarPantalla() {
         limpiarPantalla();
-        circunferencia(x, 20, 10);
-        x++;
+        lado();
+
+        pincel.fillStyle = "gray";
+        pincel.fillRect(0, 0, 600, 400);
+        console.log(x)
+
+        if (derecha) {
+            x += 10;
+            circunferencia(x, 20, 10);
+        }
+        else {
+            x -= 10;
+            circunferencia(x, 20, 10);
+        }
+
     }
 
-    setInterval(actualizarPantalla, 60);
+    function lado() {
+        if (x == 590) {
+            derecha = false;
+        }
+        else if (x == 10) {
+            derecha = true;
+        }
+    }
+
+    setInterval(actualizarPantalla, 20);
 
 
 </script>
