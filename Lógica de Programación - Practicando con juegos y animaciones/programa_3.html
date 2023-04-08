@@ -3,19 +3,27 @@
 
 <script>
 
-    function exhibirAlerta(evento) {
+    function dibujarCirculo(evento) {
         var x = evento.pageX - pantalla.offsetLeft;
         var y = evento.pageY - pantalla.offsetTop;
 
-        console.log(evento);
-        dibujarCirculo(x,y);
+
+        var colores = ["blue", "red", "green"];
+
+        if(pos > 2){
+            pos = 0;
+        }
+
+        pincel.fillStyle = colores[pos];
+        pincel.beginPath();
+        pincel.arc(x, y, 10, 0, 2 * 3.14);
+        pincel.fill();
+        console.log(x + "," + y);
     }
 
-    function dibujarCirculo(x,y) {
-        pincel.fillStyle = "green";
-        pincel.beginPath();
-        pincel.arc(x,y,10,0,10);
-        pincel.fill();
+    function alterarColor() {
+        pos++;
+        return false;
     }
 
     var pantalla = document.querySelector("canvas");
@@ -24,6 +32,8 @@
     pincel.fillStyle = "gray";
     pincel.fillRect(0, 0, 600, 400);
 
-    pantalla.onclick = exhibirAlerta;
+    var pos = 0;
+    pantalla.onclick = dibujarCirculo;
+    pantalla.oncontextmenu = alterarColor;
 
 </script>
