@@ -3,17 +3,27 @@
 
 <script>
 
+    function exhibirAlerta(evento) {
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;
+
+        console.log(evento);
+        dibujarCirculo(x,y);
+    }
+
+    function dibujarCirculo(x,y) {
+        pincel.fillStyle = "green";
+        pincel.beginPath();
+        pincel.arc(x,y,10,0,10);
+        pincel.fill();
+    }
+
     var pantalla = document.querySelector("canvas");
     var pincel = pantalla.getContext("2d");
 
     pincel.fillStyle = "gray";
-    pincel.fillRect(0,0,600,400);
-    
-    function exhibirAlerta(evento){
-        console.log(evento);
-        alert("Usted hizo un click");
-    }
-    
+    pincel.fillRect(0, 0, 600, 400);
+
     pantalla.onclick = exhibirAlerta;
-    
+
 </script>
