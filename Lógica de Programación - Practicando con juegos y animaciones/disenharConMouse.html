@@ -1,0 +1,86 @@
+<canvas width="600" height="400"></canvas>
+
+<script>
+    var pantalla = document.querySelector('canvas');
+    var pincel = pantalla.getContext('2d');
+
+    pincel.fillStyle = 'grey';
+    pincel.fillRect(0, 0, 600, 400);
+
+    var colores = ["blue", "red", "green"];
+    var color = 0;
+
+    var puedoDibujar = false;
+
+    function dibujarCirculo(evento) {
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;
+        if ((x > 0) && (x < 50) && (y > 0) && (y < 50)) {
+            puedoDibujar = false;
+        }
+        else if((x > 50) && (x < 100) && (y > 0) && (y < 50)) {
+            puedoDibujar = false;
+        }
+        else if ((x > 100) && (x < 150) && (y > 0) && (y < 50)) {
+            puedoDibujar = false;
+        }
+
+        if (puedoDibujar) {
+
+            pincel.fillStyle = colores[color];
+            pincel.beginPath();
+            pincel.arc(x, y, 5, 0, 2 * 3.14);
+            pincel.fill();
+        }
+
+    }
+
+    pantalla.onmousemove = dibujarCirculo;
+
+    function habilitarDibujar() {
+
+        puedoDibujar = true;
+    }
+
+    function deshabilitarDibujar() {
+
+        puedoDibujar = false;
+    }
+
+    pantalla.onmousedown = habilitarDibujar;
+
+    pantalla.onmouseup = deshabilitarDibujar;
+
+    cuadros();
+
+    function cuadros() {
+        pincel.fillStyle = "red";
+        pincel.fillRect(0, 0, 50, 50);
+        pincel.strokeStyle = "black";
+        pincel.strokeRect(0, 0, 50, 50);
+        pincel.fillStyle = "green";
+        pincel.fillRect(50, 0, 50, 50);
+        pincel.strokeRect(50, 0, 50, 50);
+        pincel.fillStyle = "blue";
+        pincel.fillRect(100, 0, 50, 50);
+        pincel.strokeRect(100, 0, 50, 50);
+    }
+
+    function cambiar(evento) {
+        var x = evento.pageX - pantalla.offsetLeft;
+        var y = evento.pageY - pantalla.offsetTop;
+
+        if ((x > 0) && (x < 50) && (y > 0) && (y < 50)) {
+            color = 1;
+        }
+        else if((x > 50) && (x < 100) && (y > 0) && (y < 50)) {
+            color = 2;
+        }
+        else if ((x > 100) && (x < 150) && (y > 0) && (y < 50)) {
+            color = 0;
+        }
+    }
+
+    pantalla.onclick = cambiar;
+
+</script>

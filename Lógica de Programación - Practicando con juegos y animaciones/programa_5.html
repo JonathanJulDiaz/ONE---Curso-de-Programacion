@@ -1,0 +1,55 @@
+<canvas width="600" height="400">
+</canvas>
+
+<script>
+
+    var pantalla = document.querySelector("canvas");
+    var pincel = pantalla.getContext("2d");
+
+    pincel.fillStyle = "gray";
+    pincel.fillRect(0, 0, 600, 400);
+
+    function circunferencia(x, y, radio, color) {
+        pincel.fillStyle = color;
+        pincel.beginPath();
+        pincel.arc(x, y, radio, 0, 10);
+        pincel.fill();
+    }
+
+    function limpiarPantalla() {
+        pincel.clearRect(0, 0, 600, 400);
+        pincel.fillStyle = "gray";
+        pincel.fillRect(0, 0, 600, 400);
+    }
+
+    var radio = 35;
+    var xrandom;
+    var y;
+    function blanco() {
+        limpiarPantalla();
+        xrandom = Math.round((Math.random() * (600 - radio)));
+        yrandom = Math.round((Math.random() * (400 - radio)));
+
+        circunferencia(xrandom, yrandom, radio, "red");
+        circunferencia(xrandom, yrandom, radio - 10, "white");
+        circunferencia(xrandom, yrandom, radio - 20, "red");
+    }
+
+    function disparar(evento) {
+        var posx = evento.pageX - pantalla.offsetLeft;
+        var posy = evento.pageY - pantalla.offsetTop;
+
+        if ((posx < xrandom + radio) && (posx > xrandom - radio)
+            && (posy < yrandom + radio) && (posy > yrandom - radio)) {
+            circunferencia(posx, posy, (radio - 20) / 4, "green");
+        }
+        else{
+            circunferencia(posx, posy, (radio - 20) / 4, "black");
+        }
+
+    }
+
+    setInterval(blanco, 1000);
+    pantalla.onclick = disparar;
+
+</script>
