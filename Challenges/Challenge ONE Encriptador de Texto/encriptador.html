@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+
+<html id="pagina">
+
+<head>
+
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+
+    <title>Encriptador de texto</title>
+
+    <link rel="stylesheet" href="reset.css">
+
+    <link rel="stylesheet" href="encriptador.css">
+
+</head>
+
+<body id="cuerpo">
+
+    <header>
+
+        <div>
+
+            <img src="Top.png" class="logo-alura">
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <div class="cuadros">
+
+            <textarea class="escribir" placeholder="Ingrese el texto aqui" autofocus wrap="hard"></textarea>
+
+        </div>
+
+        <div class="traductor">
+
+        </div>
+
+        <div class="informacion">
+
+            <p class="simbol">!</p>
+
+        </div>
+
+        <p class="inf">Solo letras minúsculas y sin acentos</p>
+
+        <div class="botones">
+
+            <button onclick="verificar()" class="encriptar" type="button">
+
+                Encriptar
+
+            </button>
+
+            <button class="desencriptar" type="button">
+
+                Desencriptar
+
+            </button>
+
+        </div>
+
+    </main>
+
+
+</body>
+
+<footer>
+
+
+
+</footer>
+
+<script>
+
+    function verificar() {
+        let escrito = document.getElementsByClassName("escribir");
+        let descrito = document.getElementsByClassName("puesto");
+        descrito[0].value = escrito[0].value;
+        ocultar();
+    }
+
+    function ocultar() {
+        let imagen = document.getElementById("imagen");
+        let texto = document.getElementById("vacio-texto");
+        let texto1 = document.getElementsByClassName("text-vacio");
+        let texto2 = document.getElementsByClassName("Ingrese-vacio");
+        let cuadro = document.getElementsByClassName("cuadro");
+
+        cuadro.style.display = 'none';
+        imagen.style.display = 'none';
+        texto.style.display = 'none';
+        texto1.style.display = 'none';
+        texto2.style.display = 'none';
+
+        arreglar();
+    }
+
+    function arreglar() {
+        let cuadro = document.getElementsByClassName("puesto");
+
+        cuadro.style.display = 'block';
+    }
+
+</script>
+
+</html>

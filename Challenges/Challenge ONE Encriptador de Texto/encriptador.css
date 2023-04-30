@@ -1,0 +1,99 @@
+#pagina {
+    background: #F3F5FC;
+}
+
+.logo-alura {
+    position: relative;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+.cuadros{
+    position: absolute;
+    height: 65%;
+    width: 52%;
+    left: 18%;
+}
+
+.escribir {
+    position: relative;
+    text-transform: lowercase;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    height: 100%;
+    width: 100%;
+    font-weight: 400;
+    font-size: 200%;
+    line-height: 150%;
+    outline: 0;
+    caret-color: #0A3871;
+    background: #F3F5FC;
+    border: 0;
+    color: #0A3871;
+    resize: none;
+    overflow: hidden;
+}
+
+.escribir::placeholder {
+    color: #0A3871;
+}
+
+.traductor{
+    position: absolute;
+    left: 80%;
+    background: red;
+}
+
+.informacion {
+    position: absolute;
+    top: 80%;
+    left: 18%;
+}
+
+.simbol {
+    position: relative;
+    color: white;
+    font-weight: bold;
+    font-size: 80%;
+    width: 300%;
+    background: #495057;
+    border-radius: 200%;
+    text-align: center;
+    padding: 100%;
+}
+
+.inf {
+    position: absolute;
+    display: inline;
+    color: #495057;
+    left: 20%;
+    top: 80.5%;
+    font-size: small;
+}
+
+.botones{
+    position: absolute;
+    top: 85%;
+    left: 18%;
+}
+
+.encriptar{
+    position: fixed;
+    width: 25%;
+    height: 7%;
+    background-color: #0A3871;
+    color: white;
+    border-width: 0;
+    border-radius: 15px;
+}
+
+.desencriptar{
+    position: fixed;
+    width: 25%;
+    height: 7%;
+    left: 45%;
+    background-color: #D8DFE8;
+    color: #0A3871;
+    border-width: 0;
+    border-radius: 15px;
+}
