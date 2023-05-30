@@ -189,7 +189,7 @@ td, th{
 
 .mapa{
     padding: 3em 0;
-    background-color: linear-gradient(#FEFEFE,#888888);
+    background: linear-gradient(#FEFEFE,#888888);
 }
 
 .mapa p{
@@ -237,6 +237,7 @@ td, th{
 
 .imagen-diferenciales:hover{
     opacity: 0.3;
+    box-shadow: 10px 10px 30px 15px black;
 }
 
 .video{
