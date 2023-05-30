@@ -36,17 +36,17 @@
         <form> <!--Formulario-->
             <!--Campos de texto-->
             <label for="nombreapellido">Nombre y Apellido</label><!--Nombre y apellido-->
-            <input type="text" id="nombreapellido" class="input-padron"><!--El campo-->
+            <input type="text" id="nombreapellido" class="input-padron" required><!--El campo-->
 
             <label for="correoelectronico">Correo Electrónico</label><!--Correo-->
-            <input type="email" id="correoelectronico" class="input-padron"><!--Campo-->
+            <input type="email" id="correoelectronico" class="input-padron" required placeholder="email@dominio.com"><!--Campo-->
 
             <label for="telefono">Teléfono</label><!--Telefono-->
-            <input type="tel" id="telefono" class="input-padron"><!--Campo-->
+            <input type="tel" id="telefono" class="input-padron" required placeholder="(+XX) XXX XXXX XXX"><!--Campo-->
 
             <label for="mensaje">Mensaje</label><!--Mensaje en general-->
             <textarea id="mensaje" cols="70" rows="10"
-                class="input-padron"></textarea><!--Campo de mensaje expandible-->
+                class="input-padron" required></textarea><!--Campo de mensaje expandible-->
             <!--Opciones de seleccion unica-->
 
             <div>
@@ -60,7 +60,7 @@
                         id="radio-telefono">Teléfono</label>
 
                 <label for="radio-Whatsapp"><input type="radio" name="contacto" value="email"
-                        id="radio-Whatsapp">Whatsapp</label>
+                        id="radio-Whatsapp" checked>Whatsapp</label>
 
             </div>
 
@@ -78,7 +78,7 @@
 
             </div>
 
-            <label class="checkbox"><input type="checkbox">¿Le gustaria recibir novedades de la barberia Alura?</label>
+            <label class="checkbox"><input type="checkbox" checked>¿Le gustaria recibir novedades de la barberia Alura?</label>
 
             <input type="submit" value="Enviar Formulario">
 
