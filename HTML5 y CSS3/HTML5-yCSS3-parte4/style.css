@@ -209,6 +209,10 @@ td, th{
     line-height: 1.5;
 }
 
+.items:first-child{
+    font-weight: bold;
+}
+
 .imagen-diferenciales{
     width: 60%;
 }
