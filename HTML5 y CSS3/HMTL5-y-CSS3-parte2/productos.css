@@ -50,6 +50,7 @@ nav a:hover {
     box-sizing: border-box;
     border: 6px double black;
     border-radius: 10px;
+    transition: 5s all;
 }
 
 .productos li:hover{
