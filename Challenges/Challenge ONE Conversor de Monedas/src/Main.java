@@ -9,7 +9,15 @@ import javax.swing.JOptionPane;
 
 public class Main {
 
-    public static void inicio(){
+    public static void repetir(){
+        while(true){
+            inicio();
+            if(JOptionPane.showInternalConfirmDialog(null,"¿Desea continuar?", "Seguir convirtiendo", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE) != 0){
+                System.exit(0);
+            }
+        }
+    }
+    private static void inicio(){
         Object[] listaConvertidor = {"Convertidor de Monedas", "Convertidor de Temperatura"};
 
         Object opcionesDeConvertidor = JOptionPane.showInputDialog(null,"Seleccione uno de los convertidores", "Convertidores",JOptionPane.INFORMATION_MESSAGE, null, listaConvertidor, listaConvertidor[0]);
@@ -22,8 +30,7 @@ public class Main {
             valorAConvertir = Double.parseDouble(valor);
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error", "Error",JOptionPane.ERROR_MESSAGE);
-
-            e.printStackTrace();
+            System.exit(0);
         }
 
         if(opcionesDeConvertidor.toString() == listaConvertidor[0]){
@@ -31,8 +38,6 @@ public class Main {
         } else {
             temperatura(valorAConvertir);
         }
-
-        boolean a = deseaSeguir();
     }
 
     private static void monedas(double valor){
@@ -105,24 +110,8 @@ public class Main {
         Object opcionesDeConvertidor = JOptionPane.showInputDialog(null,"Seleccione a que moneda convertir", "Conversion de Monedas", JOptionPane.INFORMATION_MESSAGE, null, conversiones, conversiones[0]);
     }
 
-    private static boolean deseaSeguir(){
-        int seguir = JOptionPane.showInternalConfirmDialog(null,                 "¿Desea continuar?", "Seguir convirtiendo", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-
-        switch (seguir){
-            case 0:
-                inicio();
-                break;
-            case 1:
-                JOptionPane.showMessageDialog(null, "Hasta pronto", "Cerrar",JOptionPane.INFORMATION_MESSAGE,null);
-                break;
-            default:
-                break;
-        }
-
-        return false;
-    }
 
     public static void main(String[] args) {
-        inicio();
+        repetir();
     }
 }
