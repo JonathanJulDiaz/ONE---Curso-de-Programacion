@@ -12,8 +12,9 @@ public class Main {
         //Connecting to the web page
         Connection conexion = Jsoup.connect(pagina);
         //executing the get request
+        Document documento = null;
         try {
-            Document documento = conexion.get();
+            documento = conexion.get();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
