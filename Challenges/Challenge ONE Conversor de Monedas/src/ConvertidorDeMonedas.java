@@ -72,11 +72,18 @@ public class ConvertidorDeMonedas extends Convertidor{
 
         Elements elemento = resultado.getElementsByClass("YMlKec fxKbKc");
 
-        valor = Double.parseDouble(elemento.html()) * valor;
+        String valorString = elemento.html();
+
+        if(valorString.indexOf(',') != -1){
+            int temp = valorString.indexOf(',');
+            valorString = valorString.substring(0, temp) + valorString.substring(temp+1);
+        }
+
+        valor = Double.parseDouble(valorString) * valor;
 
         String dosDecimal = String.valueOf(valor);
 
-        if(dosDecimal.length() > 4)
+        if(dosDecimal.substring(dosDecimal.indexOf('.')).length() > 2)
             dosDecimal = dosDecimal.substring(0, dosDecimal.indexOf('.') + 3);
 
         valor = Double.parseDouble(dosDecimal);

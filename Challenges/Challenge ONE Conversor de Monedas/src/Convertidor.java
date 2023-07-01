@@ -42,7 +42,7 @@ public class Convertidor {
         int seguir = JOptionPane.showOptionDialog(null, "¿Desea continuar?", "¿Continuar?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
 
         if (seguir == 0)
-            empezar(unidad, tema);
+            inicio();
         else
             System.exit(0);
     }
