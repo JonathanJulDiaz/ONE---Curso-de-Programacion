@@ -10,7 +10,8 @@ import java.io.IOException;
 public class ConvertidorDeMonedas extends Convertidor{
 
     public ConvertidorDeMonedas(String unidad, String tema) {
-        this.opciones = new String[]{"COP a Dólares", "COP a Euros", "COP a Libras Esterlinas", "COP a Yen Japonés", "COP a Won Sur-coreano", "Dólares a COP", "Euros a COP", "Libras Esterlinas a COP", "Yen Japonés a COP", "Won Sur-coreano a COP"};
+        this.opciones = conseguirMonedas(new String[] {"Peso colombiano", "Dólares", "Euros", "Libras esterlinas", "Yen japonés", "Won sur-coreano", "Colón costarricense", "Peso mexicano", "Peso dominicano", "Sol peruano", "Peso argentino", "Peso chileno", "Quetzal guatemalteco", "Colón salvadorenyo", "Lempira hondurenyo", "Boliviano", "Bolívar venezolano", "Balbo panamenyo", "Guaraní paraguayo", "Gurde haitiano"}, " a ");
+
         empezar(unidad, tema);
     }
 
@@ -23,8 +24,6 @@ public class ConvertidorDeMonedas extends Convertidor{
     public void empezar(String unidad, String tema){
         double valorAConvertir = seleccionar();
 
-        // Buscaar en la pagina la frase de una divisa a otra
-
         Object opcionesDeMoneda = tipoConvertidor(unidad, tema);
 
         convertir(opcionesDeMoneda.toString(), valorAConvertir);
@@ -33,30 +32,22 @@ public class ConvertidorDeMonedas extends Convertidor{
     }
 
     private void convertir(String opcion, double valor) {
-        if (opcion.equals(this.opciones[0])) {
-            JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-USD", valor) + " dolares");
-        } else if (opcion.equals(this.opciones[1])) {
-            JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-EUR", valor) + " euros");
-        } else if (opcion.equals(this.opciones[2])) {
-            JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-GBP", valor) + " libras esterlinas");
-        } else if (opcion.equals(this.opciones[3])) {
-            JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-JPY", valor) + " yenes japoneses");
-        } else if (opcion.equals(this.opciones[4])) {
-            JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-KRW", valor) + " wones sur-coreano");
-        } else if (opcion.equals(this.opciones[5])) {
-            JOptionPane.showMessageDialog(null, valor + " doláres es igual a " + extraerInformacion("USD-COP", valor) + " pesos colombianos");
-        } else if (opcion.equals(this.opciones[6])) {
-            JOptionPane.showMessageDialog(null, valor + " euros es igual a " + extraerInformacion("EUR-COP", valor) + " pesos colombianos");
-        } else if (opcion.equals(this.opciones[7])) {
-            JOptionPane.showMessageDialog(null, valor + " libras esterlinas es igual a " + extraerInformacion("GBP-COP", valor) + " pesos colombianos");
-        } else if (opcion.equals(this.opciones[8])) {
-            JOptionPane.showMessageDialog(null, valor + " yenes japoneses es igual a " + extraerInformacion("JPY-COP", valor) + " pesos colombianos");
-        } else if (opcion.equals(this.opciones[9])) {
-            JOptionPane.showMessageDialog(null, valor + " wones sur-coreano es igual a " + extraerInformacion("KRW-COP", valor) + " pesos colombianos");
+        String[] simbols = {"COP", "USD", "EUR", "GBP", "JPY", "KRW", "CRC", "MXN", "DOP", "PEN", "ARS", "CLP", "GTQ", "SVC", "HNL", "BOB", "VES", "PAB", "PYG", "HTG"};
+
+        String[] dosUnidades = permutacion(simbols, "-");
+
+        for(int i = 0; i < this.opciones.length; i++){
+            if(opcion.equals(this.opciones[i])){
+                String primero = opcion.substring(0, opcion.indexOf(" a "));
+                String segundo = opcion.substring(opcion.indexOf(" a ")+3);
+
+                JOptionPane.showMessageDialog(null, valor + " unidades monetarias en " + primero + " son iguales \na " + extraerInformacion(dosUnidades[i], valor) + " unidades monetarias en " + segundo, opcion, JOptionPane.INFORMATION_MESSAGE);
+                break;
+            }
         }
     }
 
-    private static double extraerInformacion(String aConvertir, double valor) {
+    private double extraerInformacion(String aConvertir, double valor) {
         String pagina = "https://www.google.com/finance/quote/" + aConvertir;
 
         Connection conexion = Jsoup.connect(pagina);
@@ -89,5 +80,9 @@ public class ConvertidorDeMonedas extends Convertidor{
         valor = Double.parseDouble(dosDecimal);
 
         return valor;
+    }
+
+    private String[] conseguirMonedas(String[] divisas, String separador){
+        return permutacion(divisas, separador);
     }
 }

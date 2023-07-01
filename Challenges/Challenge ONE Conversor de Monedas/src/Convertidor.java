@@ -34,6 +34,22 @@ public class Convertidor {
         return opcionesDeMoneda;
     }
 
+    protected String[] permutacion(String[] aPermutar, String separador){
+        String[] permutado = new String[(aPermutar.length* aPermutar.length)-aPermutar.length];
+
+        int pos = 0;
+        for (int i = 0; i < aPermutar.length; i++) {
+            for (int j = 0; j < aPermutar.length; j++) {
+                if (i != j) {
+                    permutado[pos] = aPermutar[i] + separador + aPermutar[j];
+                    pos++;
+                }
+            }
+        }
+
+        return permutado;
+    }
+
     public void empezar(String unidad, String tema){}
 
     protected void repetir(String unidad, String tema) {
