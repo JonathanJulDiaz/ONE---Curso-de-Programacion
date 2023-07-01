@@ -9,62 +9,50 @@ import java.io.IOException;
 
 public class ConvertidorDeMonedas extends Convertidor{
 
-    public ConvertidorDeMonedas() {
+    public ConvertidorDeMonedas(String unidad, String tema) {
         this.opciones = new String[]{"COP a Dólares", "COP a Euros", "COP a Libras Esterlinas", "COP a Yen Japonés", "COP a Won Sur-coreano", "Dólares a COP", "Euros a COP", "Libras Esterlinas a COP", "Yen Japonés a COP", "Won Sur-coreano a COP"};
-        empezar();
+        empezar(unidad, tema);
     }
 
     @Override
-    public void repetir(){
-        super.repetir();
+    public void repetir(String unidad, String tema){
+        super.repetir(unidad, tema);
     }
 
     @Override
-    public void empezar(){
+    public void empezar(String unidad, String tema){
         double valorAConvertir = seleccionar();
 
-        Object opcionesDeMoneda;
-        do {
-            opcionesDeMoneda = JOptionPane.showInputDialog(null, "Seleccione a que moneda convertir", "Conversion de Monedas", JOptionPane.INFORMATION_MESSAGE, null, this.getOpciones(), this.getOpciones()[0]);
-        } while (salir(opcionesDeMoneda));
+        // Buscaar en la pagina la frase de una divisa a otra
+
+        Object opcionesDeMoneda = tipoConvertidor(unidad, tema);
 
         convertir(opcionesDeMoneda.toString(), valorAConvertir);
 
-        repetir();
+        repetir(unidad, tema);
     }
 
-    private static void convertir(String opcion, double valor) {
-        switch (opcion) {
-            case "COP a Dólares":
-                JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-USD", valor) + " dolares");
-                break;
-            case "COP a Euros":
-                JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-EUR", valor) + " euros");
-                break;
-            case "COP a Libras Esterlinas":
-                JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-GBP", valor) + " libras esterlinas");
-                break;
-            case "COP a Yen japonés":
-                JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-JPY", valor) + " yenes japoneses");
-                break;
-            case "COP a Won Sur-coreano":
-                JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-KRW", valor) + " wones sur-coreano");
-                break;
-            case "Doláres a COP":
-                JOptionPane.showMessageDialog(null, valor + " doláres es igual a " + extraerInformacion("USD-COP", valor) + " pesos colombianos");
-                break;
-            case "Euros a COP":
-                JOptionPane.showMessageDialog(null, valor + " euros es igual a " + extraerInformacion("EUR-COP", valor) + " pesos colombianos");
-                break;
-            case "Libras Esterlinas a COP":
-                JOptionPane.showMessageDialog(null, valor + " libras esterlinas es igual a " + extraerInformacion("GBP-COP", valor) + " pesos colombianos");
-                break;
-            case "Yen japónes a COP":
-                JOptionPane.showMessageDialog(null, valor + " yenes japoneses es igual a " + extraerInformacion("JPY-COP", valor) + " pesos colombianos");
-                break;
-            case "Won Sur-coreano a COP":
-                JOptionPane.showMessageDialog(null, valor + " wones sur-coreano es igual a " + extraerInformacion("KRW-COP", valor) + " pesos colombianos");
-                break;
+    private void convertir(String opcion, double valor) {
+        if (opcion.equals(this.opciones[0])) {
+            JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-USD", valor) + " dolares");
+        } else if (opcion.equals(this.opciones[1])) {
+            JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-EUR", valor) + " euros");
+        } else if (opcion.equals(this.opciones[2])) {
+            JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-GBP", valor) + " libras esterlinas");
+        } else if (opcion.equals(this.opciones[3])) {
+            JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-JPY", valor) + " yenes japoneses");
+        } else if (opcion.equals(this.opciones[4])) {
+            JOptionPane.showMessageDialog(null, valor + " pesos colombianos es igual a " + extraerInformacion("COP-KRW", valor) + " wones sur-coreano");
+        } else if (opcion.equals(this.opciones[5])) {
+            JOptionPane.showMessageDialog(null, valor + " doláres es igual a " + extraerInformacion("USD-COP", valor) + " pesos colombianos");
+        } else if (opcion.equals(this.opciones[6])) {
+            JOptionPane.showMessageDialog(null, valor + " euros es igual a " + extraerInformacion("EUR-COP", valor) + " pesos colombianos");
+        } else if (opcion.equals(this.opciones[7])) {
+            JOptionPane.showMessageDialog(null, valor + " libras esterlinas es igual a " + extraerInformacion("GBP-COP", valor) + " pesos colombianos");
+        } else if (opcion.equals(this.opciones[8])) {
+            JOptionPane.showMessageDialog(null, valor + " yenes japoneses es igual a " + extraerInformacion("JPY-COP", valor) + " pesos colombianos");
+        } else if (opcion.equals(this.opciones[9])) {
+            JOptionPane.showMessageDialog(null, valor + " wones sur-coreano es igual a " + extraerInformacion("KRW-COP", valor) + " pesos colombianos");
         }
     }
 
@@ -86,7 +74,7 @@ public class ConvertidorDeMonedas extends Convertidor{
 
         valor = Double.parseDouble(elemento.html()) * valor;
 
-        String dosDecimal = "" + valor;
+        String dosDecimal = String.valueOf(valor);
 
         if(dosDecimal.length() > 4)
             dosDecimal = dosDecimal.substring(0, dosDecimal.indexOf('.') + 3);
@@ -94,10 +82,5 @@ public class ConvertidorDeMonedas extends Convertidor{
         valor = Double.parseDouble(dosDecimal);
 
         return valor;
-    }
-
-    @Override
-    public  boolean salir(Object ventana) {
-        return super.salir(ventana);
     }
 }

@@ -1,14 +1,13 @@
 import javax.swing.*;
-import java.lang.reflect.Method;
 
 public class Convertidor {
     protected String[] opciones;
 
-    public String[] getOpciones() {
+    private String[] getOpciones() {
         return opciones;
     }
 
-    public double seleccionar(){
+    protected double seleccionar(){
         boolean otraVez;
         String valor;
         do {
@@ -26,20 +25,48 @@ public class Convertidor {
         return Double.parseDouble(valor);
     }
 
-    public void empezar(){}
+    protected Object tipoConvertidor(String unidad, String tema){
+        Object opcionesDeMoneda;
+        do {
+            opcionesDeMoneda = JOptionPane.showInputDialog(null, "Seleccione a que " + unidad + " convertir", tema, JOptionPane.INFORMATION_MESSAGE, null, getOpciones(), getOpciones()[0]);
+        } while (salir(opcionesDeMoneda));
 
-    public void repetir() {
+        return opcionesDeMoneda;
+    }
+
+    public void empezar(String unidad, String tema){}
+
+    protected void repetir(String unidad, String tema) {
         Object[] opciones = {"Si", "No"};
 
         int seguir = JOptionPane.showOptionDialog(null, "¿Desea continuar?", "¿Continuar?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
 
         if (seguir == 0)
-            empezar();
+            empezar(unidad, tema);
         else
             System.exit(0);
     }
 
-    protected boolean salir(Object ventana) {
+    private boolean salir(Object ventana) {
         return ventana == null || ventana == JOptionPane.UNINITIALIZED_VALUE;
+    }
+
+    protected void inicio(){
+        Object[] listaConvertidor = {"Convertidor de Monedas", "Convertidor de Temperatura"};
+        Object opcionesDeConvertidor;
+        do {
+            opcionesDeConvertidor = JOptionPane.showInputDialog(null, "Seleccione uno de los convertidores", "Convertidores", JOptionPane.INFORMATION_MESSAGE, null, listaConvertidor, listaConvertidor[0]);
+
+        } while (salir(opcionesDeConvertidor));
+
+        String tipoDeConvertidor = opcionesDeConvertidor.toString();
+
+        String[] unidad = tipoDeConvertidor.split(" ");
+
+        if (tipoDeConvertidor == listaConvertidor[0]) {
+            new ConvertidorDeMonedas(unidad[unidad.length-1].toLowerCase(), opcionesDeConvertidor.toString());
+        } else if (tipoDeConvertidor == listaConvertidor[1]) {
+            System.out.println("Temperatura");
+        }
     }
 }
