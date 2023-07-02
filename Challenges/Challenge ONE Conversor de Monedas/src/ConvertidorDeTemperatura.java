@@ -7,8 +7,8 @@ public class ConvertidorDeTemperatura extends Convertidor implements Formula{
     }
 
     @Override
-    public void repetir(String unidad, String tema) {
-        super.repetir(unidad, tema);
+    public void repetir() {
+        super.repetir();
     }
 
     @Override
@@ -22,7 +22,7 @@ public class ConvertidorDeTemperatura extends Convertidor implements Formula{
     }
 
     @Override
-    protected void convertir(String opcion, double valor) {
+    protected void mostrar(String opcion, double valor) {
         for (String paso : this.opciones) {
             if (opcion.equals(paso)) {
                 char primero = opcion.substring(0, opcion.indexOf(" a ")).charAt(0);
@@ -36,23 +36,11 @@ public class ConvertidorDeTemperatura extends Convertidor implements Formula{
 
     @Override
     public double formula(String tipoFormula, double valor) {
-        double convertido;
-        char primero = tipoFormula.charAt(0);
-        char segundo = tipoFormula.charAt(tipoFormula.length()-1);
+        return 0;
+    }
 
-        if(primero == 'C' && segundo == 'F')
-            convertido = (valor * ((double) 9 /5)) + 32;
-        else if(primero == 'F' && segundo == 'C')
-            convertido = (double) (5/9) * (valor - 32);
-        else if(primero == 'C' && segundo == 'K')
-            convertido = valor + 273.15;
-        else if(primero == 'K' && segundo == 'C')
-            convertido = valor - 273.15;
-        else if(primero == 'F' && segundo == 'K')
-            convertido = formula("F-C", valor) + 273.15;
-        else
-            convertido = formula("C-F", formula("K-C",valor));
-
-        return convertido;
+    @Override
+    public double formula(String tipoFormula, double valor1, double valor2) {
+        return 0;
     }
 }

@@ -11,8 +11,8 @@ public class ConvertidorDeMonedas extends Convertidor {
     }
 
     @Override
-    protected void repetir(String unidad, String tema) {
-        super.repetir(unidad, tema);
+    protected void repetir() {
+        super.repetir();
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ConvertidorDeMonedas extends Convertidor {
     }
 
     @Override
-    protected void convertir(String opcion, double valor) {
+    protected void mostrar(String opcion, double valor) {
         String[] simbols = {"COP", "USD", "EUR", "GBP", "JPY", "KRW", "CRC", "MXN", "DOP", "PEN", "ARS", "CLP", "GTQ", "SVC", "HNL", "BOB", "VES", "PAB", "PYG", "HTG"};
 
         String[] dosUnidades = permutacion(simbols, "-");

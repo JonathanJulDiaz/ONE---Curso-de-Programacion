@@ -21,14 +21,13 @@ public class Convertidor {
         return tipoPagina;
     }
 
-    protected double seleccionar() {
+    protected double ingresarValor() {
         boolean otraVez;
         String valor;
         do {
-
             valor = JOptionPane.showInputDialog(null, "Ingrese el valor a convertir", "Convertidor de unidades", JOptionPane.INFORMATION_MESSAGE);
 
-            if(valor.isBlank())
+            if (valor.isBlank())
                 otraVez = true;
             else
                 otraVez = verificarNum(valor);
@@ -38,7 +37,7 @@ public class Convertidor {
         return Double.parseDouble(valor);
     }
 
-    private boolean verificarNum(String numero) {
+    protected boolean verificarNum(String numero) {
         boolean valido = false;
         String caracterValido = "0123456789.";
         ArrayList<Character> nums = new ArrayList<>();
@@ -60,9 +59,10 @@ public class Convertidor {
 
     protected Object tipoConvertidor(String unidad, String tema) {
         Object opcionesDeUnidad;
-        do {
-            opcionesDeUnidad = JOptionPane.showInputDialog(null, "Seleccione a que " + unidad + " convertir", tema, JOptionPane.INFORMATION_MESSAGE, null, getOpciones(), getOpciones()[0]);
-        } while (salir(opcionesDeUnidad));
+
+        opcionesDeUnidad = JOptionPane.showInputDialog(null, "Seleccione a que " + unidad + " convertir", tema, JOptionPane.INFORMATION_MESSAGE, null, getOpciones(), getOpciones()[0]);
+
+        salir(opcionesDeUnidad);
 
         return opcionesDeUnidad;
     }
@@ -70,13 +70,16 @@ public class Convertidor {
     protected double extraerInformacion(String aConvertir, double valor) {
         String pagina = getTipoPagina()[0] + aConvertir;
 
-        Connection conexion = Jsoup.connect(pagina);
-
+        Connection conexion;
         Document documento = null;
+
         try {
+            conexion = Jsoup.connect(pagina);
             documento = conexion.get();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "No se pudó establecer conexión a internet", "Error al intentar conectar", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+            System.exit(1);
         }
 
         Element resultado = documento.body();
@@ -124,19 +127,19 @@ public class Convertidor {
     }
 
     protected void empezar(String unidad, String tema) {
-        double valorAConvertir = seleccionar();
+        double valorAConvertir = ingresarValor();
 
         Object opciones = tipoConvertidor(unidad, tema);
 
-        convertir(opciones.toString(), valorAConvertir);
+        mostrar(opciones.toString(), valorAConvertir);
 
-        repetir(unidad, tema);
+        repetir();
     }
 
-    protected void convertir(String opcion, double valor) {
+    protected void mostrar(String opcion, double valor) {
     }
 
-    protected void repetir(String unidad, String tema) {
+    protected void repetir() {
         Object[] opciones = {"Si", "No"};
 
         int seguir = JOptionPane.showOptionDialog(null, "¿Desea continuar?", "¿Continuar?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
@@ -147,17 +150,18 @@ public class Convertidor {
             System.exit(0);
     }
 
-    private boolean salir(Object ventana) {
-        return ventana == null || ventana == JOptionPane.UNINITIALIZED_VALUE;
+    private void salir(Object ventana) {
+        if (ventana == null || ventana == JOptionPane.UNINITIALIZED_VALUE)
+            System.exit(0);
     }
 
     protected void inicio() {
-        Object[] listaConvertidor = {"Convertidor de Monedas", "Convertidor de Temperatura"};
+        Object[] listaConvertidor = {"Convertidor de Monedas", "Convertidor de Temperatura", "Calculador de IMS"};
         Object opcionesDeConvertidor;
-        do {
-            opcionesDeConvertidor = JOptionPane.showInputDialog(null, "Seleccione uno de los convertidores", "Convertidores", JOptionPane.INFORMATION_MESSAGE, null, listaConvertidor, listaConvertidor[0]);
 
-        } while (salir(opcionesDeConvertidor));
+        opcionesDeConvertidor = JOptionPane.showInputDialog(null, "Seleccione uno de los convertidores", "Convertidores", JOptionPane.INFORMATION_MESSAGE, null, listaConvertidor, listaConvertidor[0]);
+
+        salir(opcionesDeConvertidor);
 
         String tipoDeConvertidor = opcionesDeConvertidor.toString();
 
@@ -167,6 +171,8 @@ public class Convertidor {
             new ConvertidorDeMonedas(unidad[unidad.length - 1].toLowerCase(), tipoDeConvertidor);
         } else if (tipoDeConvertidor == listaConvertidor[1]) {
             new ConvertidorDeTemperatura(unidad[unidad.length - 1].toLowerCase(), tipoDeConvertidor);
+        } else {
+            new CalculadorIMS();
         }
     }
 }
